@@ -1,0 +1,61 @@
+# Values for the mvisonneau/gitlab-ci-pipelines-exporter char version 0.3.5
+
+# For the datadog agent, which gathers data from the gitlab-ci-pipelines-exporter pod.
+# This config exports a limited number of metrics listed below.
+podAnnotations: 
+  ad.datadoghq.com/gitlab-ci-pipelines-exporter.check_names: '["openmetrics"]'
+  ad.datadoghq.com/gitlab-ci-pipelines-exporter.init_configs: '[{}]'
+  ad.datadoghq.com/gitlab-ci-pipelines-exporter.instances: |
+    [
+      {
+        "openmetrics_endpoint": "http://%%host%%:8080/metrics",
+        "namespace": "gitlab_ci_pipelines_exporter",
+        "metrics": [
+          "gcpe_currently_queued_tasks_count",
+          "gcpe_projects_count",
+          "gcpe_refs_count",
+          "gitlab_ci_pipeline_duration_seconds",
+          "gitlab_ci_pipeline_job_artifact_size_bytes",
+          "gitlab_ci_pipeline_job_duration_seconds",
+          "gitlab_ci_pipeline_job_queued_duration_seconds",
+          "gitlab_ci_pipeline_job_run_count",
+          "gitlab_ci_pipeline_job_status",
+          "gitlab_ci_pipeline_run_count",
+          "gitlab_ci_pipeline_status"
+        ]
+      }
+    ]
+
+redis:
+  enabled: false # Disable bitnami redis. This config uses its own redis for the exporter.
+
+# Uncomment the following block if you want to use your own image registry.
+# image:
+#   repository: you_image_registry/gitlab-ci-pipelines-exporter
+
+# You can find the full specification here: https://github.com/mvisonneau/gitlab-ci-pipelines-exporter/blob/main/docs/configuration_syntax.md
+config:
+  # for HA setup
+  redis:
+    url: redis://gitlab-ci-pipelines-exporter.xxxxxx.xx.0001.use1.cache.amazonaws.com:6379 # Use Elasticach from AWS
+  gitlab:
+    url: https://gitlab.com
+    token: {{ requiredEnv "GCPE_GITLAB_TOKEN" | quote }} # Your Gitlab token
+  projects:
+    - name: your_gitlab_group/your_project
+    # Add more projects if needed
+  project_defaults:
+    # Only submit the status label of the last run of a pipeline or job
+    output_sparse_status_metrics: true
+    pull:
+      refs:
+        branches:
+          regexp: "^(?:main|master)$" # only main and master branches
+        tags:
+          regexp: ".*"
+          most_recent: 3 # Only 3 recent tags are exposed
+        merge_requests:
+          enabled: false
+      pipeline:
+        jobs:
+          enabled: true # Enable job-level metrics
