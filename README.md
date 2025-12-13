@@ -1,4 +1,4 @@
-# gitlab-ci-datadog
+# Gitlab CI Observability in Datadog
 
 Monitoring solution for GitLab CI pipelines using [mvisonneau/gitlab-ci-pipelines-exporter](https://github.com/mvisonneau/gitlab-ci-pipelines-exporter) and Datadog. This project provides a ready-to-use Datadog dashboard and a Helm configuration for exporting GitLab CI metrics.
 
