@@ -1,4 +1,4 @@
-# Values for the mvisonneau/gitlab-ci-pipelines-exporter char version 0.3.5
+# Values for the mvisonneau/gitlab-ci-pipelines-exporter chart version 0.3.5
 
 # For the datadog agent, which gathers data from the gitlab-ci-pipelines-exporter pod.
 # This config exports a limited number of metrics listed below.
