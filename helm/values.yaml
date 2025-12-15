@@ -35,7 +35,7 @@ redis:
 
 # You can find the full specification here: https://github.com/mvisonneau/gitlab-ci-pipelines-exporter/blob/main/docs/configuration_syntax.md
 config:
-  # for HA setup
+  # For HA setup
   redis:
     url: redis://gitlab-ci-pipelines-exporter.xxxxxx.xx.0001.use1.cache.amazonaws.com:6379 # Use Elasticach from AWS
   gitlab:
@@ -50,7 +50,7 @@ config:
     pull:
       refs:
         branches:
-          regexp: "^(?:main|master)$" # only main and master branches
+          regexp: "^(?:main|master)$" # Only main and master branches
         tags:
           regexp: ".*"
           most_recent: 3 # Only 3 recent tags are exposed
