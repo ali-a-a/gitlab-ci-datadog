@@ -93,7 +93,10 @@ Import `gitlab-ci-datadog-dashboard.json` into Datadog to get a comprehensive vi
 - **Artifact Size**: MB per job.
 - **Job Run Count**: Bar chart for last 24h.
 
-All widgets use template variables for filtering by project, ref, and stage.
+All widgets use template variables for filtering by project, ref, and stage. A preview of the dashboard:
+
+![422437777-0903b96f-56e9-4396-bf1e-867ec53acd70](https://github.com/user-attachments/assets/def795ba-e149-4d7e-ac6c-91f047167d20)
+![422437777-0903b96f-56e9-4396-bf1e-867ec53acd70](https://github.com/user-attachments/assets/53648581-818e-4794-85cb-536dcf851c16)
 
 ---
 
