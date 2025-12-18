@@ -2,6 +2,8 @@
 
 # For the datadog agent, which gathers data from the gitlab-ci-pipelines-exporter pod.
 # This config exports a limited number of metrics listed below.
+# You might also need to increase the export limit based on the number of metrics you generate:
+# https://docs.datadoghq.com/containers/kubernetes/prometheus/
 podAnnotations: 
   ad.datadoghq.com/gitlab-ci-pipelines-exporter.check_names: '["openmetrics"]'
   ad.datadoghq.com/gitlab-ci-pipelines-exporter.init_configs: '[{}]'
